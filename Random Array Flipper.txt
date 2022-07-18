@@ -1,0 +1,71 @@
+Class: Wrapper
+
+import java.util.*;
+
+public class Wrapper extends Rando{
+    public ArrayList<Integer> listTrans = new ArrayList<>();
+
+    public int[] rand_gen(){ //random array method
+        int[] rand_arr = new int[randono()];
+
+        for(int i = 0; i < rand_arr.length; i++){
+            rand_arr[i] = randono();
+        }
+
+        return rand_arr;
+    }
+
+    public void flip(Wrapper o){
+        Collections.reverse(o.listTrans);
+    }
+
+    public static void main(String[] args) {
+        Wrapper main_calls = new Wrapper(); //object to call non-static items
+
+        int[] final_arr = main_calls.rand_gen(); //generate random array
+
+        for(int travel: final_arr){ //transfer array to Arraylist for flipping
+            main_calls.listTrans.add(travel);
+        }
+
+        System.out.println("The random array is: "); //print initial array
+        for (int k : final_arr) {
+            System.out.println(k);
+        }
+
+        main_calls.flip(main_calls); //flip the list
+
+        for(int i = 0; i < main_calls.listTrans.size() ; i++){
+            final_arr[i] = main_calls.listTrans.get(i);
+        } //put the flipped list back into the array
+
+        System.out.println();
+        System.out.println("The flipped array is:");
+
+        for (int j : final_arr) {
+            System.out.println(j);
+        }
+    }
+}
+
+
+
+
+Class Rando:
+
+import java.util.*;
+
+//abstract random number generator
+interface limits{
+    int upper_bound = 25;
+}
+abstract class Rando implements limits{
+
+    public static int randono(){
+        Random rand_num = new Random();
+
+        return rand_num.nextInt(upper_bound);
+    }
+
+}
+
